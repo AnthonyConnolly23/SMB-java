@@ -14,6 +14,8 @@ public class Player extends GameObject {
 	
 	private Handler handler; 
 	
+	private boolean jumped = false;
+	
 	public Player (float x, float y, int scale, Handler handler) {
 		super(x, y, ObjectId.Player, WIDTH, HEIGHT, scale);
 		this.handler = handler;
@@ -32,6 +34,30 @@ public class Player extends GameObject {
 		g.setColor(Color.yellow);
 		g.fillRect((int) getX(), (int) getY(), (int) WIDTH, (int) HEIGHT);
 		showBounds(g);
+	}
+	
+	private void collision() {
+		for (int i = 0; i < handler.getGameObjs().size(); i++) {
+			GameObject temp = handler.getGameObjs().get(i);
+			
+		if (temp.getID() == ObjectId.Block || temp.getID() == ObjectId.Pipe) {
+			if (getBounds().intersects(temp.getBounds())) {
+				
+			}
+			
+			if (getBoundsTop().intersects(temp.getBounds())) {
+				
+			}
+			
+			if (getBoundsRight().intersects(temp.getBounds())) {
+				
+			}
+			
+			if (getBoundsLeft().intersects(temp.getBounds())) {
+				
+			}
+		}
+		}
 	}
 
 	@Override
@@ -80,6 +106,14 @@ public class Player extends GameObject {
 		g2d.draw(getBoundsTop());
 		g2d.draw(getBoundsRight());
 		g2d.draw(getBoundsLeft());
+	}
+	
+	public boolean hasJumped() {
+		return jumped;
+	}
+	
+	public void setJumped(boolean hasJumped) {
+		jumped = hasJumped;
 	}
 	
 	
