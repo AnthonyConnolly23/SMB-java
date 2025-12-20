@@ -17,3 +17,5 @@ public class BufferedImageLoader {
 		return image;
 	}
 }
+
+//git add test
