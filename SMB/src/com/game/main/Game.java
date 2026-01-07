@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import com.game.gfx.Camera;
+import com.game.gfx.Texture;
 import com.game.gfx.Windows;
 import com.game.object.util.Handler;
 import com.game.object.util.KeyInput;
@@ -29,7 +31,8 @@ public class Game extends Canvas implements Runnable {
 	//GAME COMPONENTS
 	private Thread thread;
 	private Handler handler;
-	
+	private Camera cam;
+	private static Texture tex;
 	
 	public Game() {
 		initialize();
@@ -43,6 +46,8 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	private void initialize() {
+		tex = new Texture();
+		
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 		
@@ -50,11 +55,11 @@ public class Game extends Canvas implements Runnable {
 		handler.setPlayer(new Player(32, 32, 1, handler));
 		
 		for (int i = 0; i < 20; i++) {
-			handler.addObj(new Block(i*32, 32*10, 32, 32, 1));
+			handler.addObj(new Block(i*32, 32*10, 32, 32, 2, 1));
 		}
 		
 		for (int i = 0; i < 30; i++) {
-			handler.addObj(new Block(i*32, 32*15, 32, 32, 1));
+			handler.addObj(new Block(i*32, 32*15, 32, 32, 2, 1));
 		}
 		
 		new Windows(WINDOW_WIDTH, WINDOW_HEIGHT, NAME, this);
@@ -150,6 +155,10 @@ public class Game extends Canvas implements Runnable {
 	
 	public static int getWindowWidth() {
 		return WINDOW_WIDTH;
+	}
+	
+	public static Texture getTexture() {
+		return tex;
 	}
 	
 
